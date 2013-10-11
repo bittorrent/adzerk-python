@@ -408,10 +408,10 @@ class Channel(Base):
     _name = 'channel'
     _fields = FieldSet(
         Field('Title'),
-        Field('Commission'), 
-        Field('Engine'), 
-        Field('Keywords'), 
-        Field('CPM'), 
+        Field('Commission'),
+        Field('Engine'),
+        Field('Keywords'),
+        Field('CPM'),
         Field('AdTypes'),
         Field('IsDeleted'),
     )
@@ -470,3 +470,24 @@ class Campaign(Base):
     def __repr__(self):
         return '<Campaign %s>' % (self.Id)
 
+
+class Report(Base):
+    _name = 'report'
+
+    @classmethod
+    def create_report(cls, **attr):
+        url = '/'.join([cls._base_url, 'report'])
+        data = 'criteria=%s' % json.dumps(attr)
+        response = requests.post(url, headers=cls._headers(), data=data)
+        item = handle_response(response)
+        return item
+
+    @classmethod
+    def retrieve_report(cls, ReportId):
+        url = '/'.join([cls._base_url, 'report', ReportId])
+        response = requests.get(url, headers=cls._headers())
+        item = handle_response(response)
+        return item
+
+    def __repr__(self):
+        return '<Report %s>' % (self.Id)
