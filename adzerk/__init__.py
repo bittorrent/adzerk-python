@@ -153,6 +153,10 @@ class Base(object):
         item = handle_response(response)
         return cls._from_item(item)
 
+    @classmethod
+    def fields(cls):
+        return cls._fields.to_set(exclude_optional=False)
+
 
 class Map(Base):
     parent = None
@@ -344,6 +348,9 @@ class Creative(Base):
         items = content.get('items')
         if items:
             return [cls._from_item(item) for item in items]
+
+    def save(self):
+        return self._send()
 
     def __repr__(self):
         return '<Creative %s>' % (self.Id)
