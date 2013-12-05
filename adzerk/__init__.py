@@ -153,6 +153,10 @@ class Base(object):
         item = handle_response(response)
         return cls._from_item(item)
 
+    @classmethod
+    def fields(cls):
+        return cls._fields.to_set(exclude_optional=False)
+
 
 class Map(Base):
     parent = None
