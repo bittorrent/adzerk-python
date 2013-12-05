@@ -349,6 +349,9 @@ class Creative(Base):
         if items:
             return [cls._from_item(item) for item in items]
 
+    def save(self):
+        return self._send()
+
     def __repr__(self):
         return '<Creative %s>' % (self.Id)
 
