@@ -502,6 +502,9 @@ class Campaign(Base):
             item['Flights'] = [flight._to_item() for flight in flights]
         return item
 
+    def save(self):
+        return self._send()
+
     def __repr__(self):
         return '<Campaign %s>' % (self.Id)
 
