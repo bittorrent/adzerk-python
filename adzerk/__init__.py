@@ -365,6 +365,7 @@ class Creative(Base):
         Field('IsSync'),
         Field('IsDeleted'),
         Field('IsActive'),
+        Field('Metadata', optional=True),
     )
 
     @classmethod
